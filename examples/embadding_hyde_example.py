@@ -1,6 +1,17 @@
+import os
+from pathlib import Path
+
+from dotenv import load_dotenv
+
+# The key is read from the environment — never hardcode it in a tracked file.
+# Put it in chatbot_be/.env (which is gitignored), or export GROQ_API_KEY.
+load_dotenv(Path(__file__).resolve().parent.parent / "chatbot_be" / ".env")
+GROQ_API_KEY = os.getenv("GROQ_API_KEY")
+if not GROQ_API_KEY:
+    raise SystemExit("GROQ_API_KEY is not set. Add it to chatbot_be/.env or export it.")
+
 from openai import OpenAI
 
-GROQ_API_KEY = "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"
 
 client = OpenAI(
     api_key=GROQ_API_KEY,

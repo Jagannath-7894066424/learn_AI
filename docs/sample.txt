@@ -1,0 +1,29 @@
+Project Nimbus — Internal Notes
+
+Project Nimbus is an internal tool for tracking weather-sensitive deliveries.
+It was started in March 2024 by the logistics platform team and is written in
+Python with a PostgreSQL backend.
+
+Architecture
+The service has three parts. A collector polls the national weather feed every
+fifteen minutes and writes observations to the "observations" table. A scoring
+worker joins those observations against scheduled deliveries and assigns each
+delivery a risk score from 0 to 100. A small web dashboard shows dispatchers
+the highest risk deliveries for the next 24 hours.
+
+Risk scoring
+A delivery scores above 70 when wind speed exceeds 45 km/h, when freezing rain
+is forecast within two hours of the delivery window, or when the destination
+depot has reported a closure. Scores are recomputed every time new observations
+arrive, so a score is never older than fifteen minutes.
+
+Operations
+Nimbus runs on three application servers behind a load balancer. The on-call
+rotation is weekly and handover happens Monday at 10:00. The most common
+incident is the weather feed timing out, which the collector retries three
+times with exponential backoff before raising an alert.
+
+Limitations
+Nimbus does not cover international shipments, and it has no mobile app. The
+team plans to add depot-level historical accuracy reporting in the next
+quarter.

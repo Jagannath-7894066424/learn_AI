@@ -6,3 +6,6 @@ __pycache__/
 .env
 .vscode/
 .idea/
+node_modules/
+dist/
+docs/uploads/

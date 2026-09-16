@@ -1,0 +1,18 @@
+# --- RAG core ---
+psycopg[binary]>=3.1
+pgvector>=0.2.5
+sentence-transformers>=2.7.0
+python-dotenv>=1.0.0
+
+# --- Document extraction ---
+pypdf>=5.0.0
+openpyxl>=3.1.0
+
+# --- LLM providers ---
+ollama>=0.3.0
+groq>=0.11.0
+
+# --- HTTP API ---
+fastapi>=0.115.0
+uvicorn[standard]>=0.30.0
+python-multipart>=0.0.9

@@ -1,3 +1,5 @@
+# Dependencies for the standalone example scripts in this folder (run_gpt2.py etc.)
+# The RAG chatbot has its own: backend/requirements.txt
 transformers>=4.30.0
 torch>=1.13.1
 huggingface-hub>=0.15.1
